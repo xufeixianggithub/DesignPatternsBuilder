@@ -53,6 +53,28 @@ public class ConcreteBuilder {
      * @return 构建的保险合同的对象
      */
     public InsuranceContract build(){
+        if(contractId==null || contractId.trim().length()==0){
+            throw new IllegalArgumentException("合同编号不能为空");
+        }
+        boolean signPerson = personName!=null && personName.trim().length()>0;
+        boolean signCompany = companyName!=null && companyName.trim().length()>0;
+        if(signPerson && signCompany){
+            throw new IllegalArgumentException("一份保险合同不能同时与人和公司签订");
+        }
+        if(signPerson==false && signCompany==false){
+            throw new IllegalArgumentException("一份保险合同不能没有签订对象");
+        }
+        if(beginDate<=0){
+            throw new IllegalArgumentException("合同必须有保险开始生效的日期");
+        }
+        if(endDate<=0){
+            throw new IllegalArgumentException("合同必须有保险失效的日期");
+        }
+        if(endDate<=beginDate){
+            throw new IllegalArgumentException("保险失效的日期必须大于保险生效日期");
+        }
+
+
         return new InsuranceContract(this);
     }
 
