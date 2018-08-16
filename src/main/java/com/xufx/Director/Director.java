@@ -1,9 +1,15 @@
 package com.xufx.Director;
 
 import com.xufx.Builder.Builder;
+import com.xufx.Data.ExportDataModel;
+import com.xufx.Data.ExportFooterModel;
+import com.xufx.Data.ExportHeaderModel;
+
+import java.util.Collection;
+import java.util.Map;
 
 /**
- * 指导者，指导使用构建器的接口来构建产品的对象
+ * 指导者，指导使用构建器的接口来构建输出的文件的对象
  */
 public class Director {
     /**
@@ -18,10 +24,21 @@ public class Director {
         this.builder = builder;
     }
     /**
-     * 示意方法，指导构建器构建最终的产品对象
+     * 指导构建器构建最终的输出的文件的对象
+     * @param ehm 文件头的内容
+     * @param mapData 数据的内容
+     * @param efm 文件尾的内容
      */
-    public void construct() {
-        //通过使用构建器接口来构建最终的产品对象
-        builder.buildPart();
+    public void construct(ExportHeaderModel ehm, Map<String,Collection<ExportDataModel>> mapData, ExportFooterModel efm) {
+        //进行数据校验
+
+        //1：先构建Header
+        builder.buildHeader(ehm);
+        //实现一个Header的后处理
+        //可以在这里实现一些业务
+        //2：然后构建Body
+        builder.buildBody(mapData);
+        //3：然后构建Footer
+        builder.buildFooter(efm);
     }
 }
