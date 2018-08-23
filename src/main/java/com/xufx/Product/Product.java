@@ -5,4 +5,7 @@ package com.xufx.Product;
  */
 public interface Product {
     //定义产品的操作
+    public void setHead(String head);
+    public void setBody(String body);
+    public void setEnd(String end);
 }

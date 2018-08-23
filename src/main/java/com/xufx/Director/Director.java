@@ -20,8 +20,10 @@ public class Director {
     /**
      * 示意方法，指导构建器构建最终的产品对象
      */
-    public void construct() {
+    public void construct(String head,String body,String end) {
         //通过使用构建器接口来构建最终的产品对象
-        builder.buildPart();
+        builder.buildHead(head);
+        builder.buildBody(body);
+        builder.buildEnd(end);
     }
 }
